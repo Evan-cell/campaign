@@ -6,12 +6,14 @@ import Messagescreen from './screens/Messagescreen';
 
 import { NavigationContainer} from '@react-navigation/native'
 import { createNativeStackNavigator} from '@react-navigation/native-stack'
+import GlobalState from './context';
 
 const stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <GlobalState>
+          <NavigationContainer>
       <stack.Navigator>
         <stack.Screen
         name='homescreen'
@@ -31,21 +33,17 @@ export default function App() {
         
       </stack.Navigator>
           <View style={styles.container}>
-      
-     
 
-      <StatusBar style="auto" />
+      <StatusBar hidden=
+      {true} style="auto" />
     </View>
     </NavigationContainer>
+    </GlobalState>
+
 
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });
