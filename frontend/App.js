@@ -7,17 +7,37 @@ import Messagescreen from './screens/Messagescreen';
 import { NavigationContainer} from '@react-navigation/native'
 import { createNativeStackNavigator} from '@react-navigation/native-stack'
 
+const stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>my name is kimani</Text>
+    <NavigationContainer>
+      <stack.Navigator>
+        <stack.Screen
+        name='homescreen'
+        component={Homepage}
+        options={{headerShown:false}}
+        />
+        <stack.Screen
+        name='chatscreen'
+        component={Chatscreen}
+        options={{headerShown:false}}
+        />
+        <stack.Screen
+        name='messagescreen'
+        component={Messagescreen}
+        options={{headerShown:false}}
+        />
+        
+      </stack.Navigator>
+          <View style={styles.container}>
+      
      
-      <View> 
-        <Text>STATUS</Text>
-      </View>
+
       <StatusBar style="auto" />
     </View>
+    </NavigationContainer>
+
   );
 }
 
