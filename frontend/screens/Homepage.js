@@ -1,15 +1,62 @@
-import React, { Component, useContext } from 'react'
-import { Text, View ,StyleSheet, ImageBackground, TextInput, Pressable} from 'react-native'
+import React, { Component, useContext,useEffect } from 'react'
+import { Text, View ,StyleSheet, ImageBackground, TextInput, Pressable, Alert, Keyboard} from 'react-native'
 import homeImage from '../assets/home-image.jpg'
 import GlobalState, { GlobalContext} from '../context'
-export default function Homepage(){
+export default function Homepage({navigation}){
   const {
     showLoginView,
     setShowLoginView,
     currentUserName,
     setCurrentUserName,
+    currentUser,
+    setCurrentUser,
+    allUsers,
+    setAllUsers,
+    allChatRooms,
+    setAllChatRooms,
+    modalVisible,
+    setModalVisible,
+    currentGroupName,
+    setCurrentGroupName,
+    allChatMessages,
+    setAllChatMessages,
+    currentChatMesage, setCurrentChatMessage
 
   } = useContext(GlobalContext);
+  handleRegisterAndSignIn = (isLogin) => {
+    if (currentUserName.trim() !== "") {
+      const index = allUsers.findIndex(
+        (userItem) => userItem === currentUserName
+      );
+
+      if (isLogin) {
+        if (index === -1) {
+          Alert.alert("Please register first");
+        } else {
+          setCurrentUser(currentUserName);
+        }
+      } else {
+        if (index === -1) {
+          allUsers.push(currentUserName);
+          setAllUsers(allUsers);
+          setCurrentUser(currentUserName);
+        } else {
+          Alert.alert("Already registered ! Please login");
+        }
+      }
+
+      setCurrentUserName("");
+    } else {
+      Alert.alert("User name field is empty");
+    }
+
+    Keyboard.dismiss();
+  }
+  useEffect(() => {
+    if (currentUser.trim() !== "") navigation.navigate("chatscreen");
+  }, [currentUser]);
+
+  console.log(allUsers, currentUser);
     return (
       
       <View style={styles.mainWrapper}>
@@ -32,12 +79,12 @@ export default function Homepage(){
                 ></TextInput>
               </View>
               <View style={styles.buttonWrapper}>
-                <Pressable style={styles.button}>
+                <Pressable onPress={handleRegisterAndSignIn(false)} style={styles.button}>
                   <View>
                     <Text style={styles.buttonText}>Register</Text>
                   </View>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable onPress={handleRegisterAndSignIn(true)} style={styles.button}>
                   <View>
                     <Text style={styles.buttonText}>Login</Text>
                   </View>

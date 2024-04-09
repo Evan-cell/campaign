@@ -4,11 +4,17 @@ import { Text, StyleSheet, View } from 'react-native'
 export default class Messagescreen extends Component {
   render() {
     return (
-      <View>
-        <Text> textInComponent </Text>
+      <View style={styles.mainWrapper}>
+       <View></View>
+       <View></View>
+       <View></View>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  mainWrapper : {
+
+  }
+})
