@@ -47,7 +47,7 @@ export default function Homepage({navigation}){
 
       setCurrentUserName("");
     } else {
-      Alert.alert("User name field is empty");
+      
     }
 
     Keyboard.dismiss();

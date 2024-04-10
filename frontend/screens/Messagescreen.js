@@ -5,9 +5,7 @@ export default class Messagescreen extends Component {
   render() {
     return (
       <View style={styles.mainWrapper}>
-       <View></View>
-       <View></View>
-       <View></View>
+
       </View>
     )
   }
